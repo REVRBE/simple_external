@@ -1,50 +1,21 @@
-# simple_external
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Triggerbot with Random Delay</title>
-</head>
-<body>
-	<h1>Triggerbot with Random Delay</h1>
+<h1>Simple mouse_event Triggerbot with Randomized Delay</h1>
 
-	<p>This is a simple triggerbot that uses randomized delay to prevent detection. It uses the Windows API to read and write memory of a running process.</p>
+This is a simple mouse_event triggerbot for Counter-Strike: Global Offensive (CSGO) written in C++. The triggerbot automatically fires your weapon when your crosshair is over an enemy player.
 
-	<h2>Installation</h2>
+The triggerbot works by constantly checking whether the configured trigger key (default: VK_XBUTTON1) is being held down. If the key is pressed, the triggerbot reads information about the player that your crosshair is currently over, such as their health and team, and fires the weapon if the player is an enemy with non-zero health.
 
-	<p>To use this code, you will need to have a C++ compiler installed on your machine. You can then simply download the files and compile them with your preferred C++ compiler.</p>
+The delay between pressing the trigger key and firing the weapon is randomized between a minimum and maximum delay time (default: 5-15ms), making it harder for anti-cheat systems to detect the triggerbot.
 
-	<h2>Usage</h2>
+<h2>Usage</h2>
 
-	<p>To use the triggerbot, you need to provide the process name in the constructor of the <code>Memory</code> class. You can then create an instance of the <code>Triggerbot</code> class and call the <code>Run</code> function in a loop to activate the triggerbot.</p>
+To use this triggerbot, compile the provided source code with a compatible C++ compiler and run the resulting executable. Ensure that the CS:GO game is running before launching the triggerbot. The triggerbot will automatically detect the game process and attach itself to it. Press the specified trigger key (default: Mouse 4) when in-game to activate the triggerbot.
 
-	<h3>Configurations</h3>
+<b>Warning:</b> This triggerbot is for educational purposes only. Using this bot in the game may result in a ban. Use at your own risk.
 
-	<p>You can change the settings of the triggerbot by modifying the <code>Config</code> namespace in the <code>config.h</code> file. The default settings are:</p>
+<h3>Personal Note</h3>
 
-	<pre><code>constexpr int TRIGGER_KEY = VK_XBUTTON1;
-constexpr int TRIGGER_DELAY_MIN = 5;
-constexpr int TRIGGER_DELAY_MAX = 15;</code></pre>
+Hey everyone! I'm excited to share my very first repository on GitHub. I've been learning a lot about C++ and game hacking, and I wanted to put my skills to the test by creating this simple triggerbot for CS:GO.
 
-	<h2>Code structure</h2>
+I hope you find this project interesting, and please remember that this is for educational purposes only. I would love to receive your feedback, suggestions, and any improvements you might have in mind. Feel free to open issues or submit pull requests.
 
-	<h3><code>trigger.h</code></h3>
-
-	<p>This header file contains the definition of the <code>Triggerbot</code> class. This class has a constructor that takes a reference to a <code>Memory</code> object. It also has a <code>Run</code> function that reads memory to determine if the trigger key is being pressed and if the crosshair is on an enemy target. If the conditions are met, the function simulates a mouse click with a randomized delay.</p>
-
-	<h3><code>config.h</code></h3>
-
-	<p>This header file contains the <code>Config</code> namespace, which allows the user to customize the settings of the triggerbot.</p>
-
-	<h3><code>memory.h</code> and <code>memory.cpp</code></h3>
-
-	<p>These files contain the definition of the <code>Memory</code> class. This class encapsulates the functionality of reading and writing memory of a running process using the Windows API.</p>
-
-	<h3><code>main.cpp</code></h3>
-
-	<p>This file contains the <code>main</code> function, which creates an instance of the <code>Memory</code> class and prints the process ID and the base addresses of the <code>client.dll</code> and <code>engine.dll</code> modules. It then creates an instance of the <code>Triggerbot</code> class and calls its <code>Run</code> function in a loop.</p>
-
-	<h2>License</h2>
-
-	<p>This code is released under the MIT License. See the <code>LICENSE</code> file for more information.</p>
-</body>
-</html>
+Wish me good luck on my coding journey, and happy coding to all of you! 😄
