@@ -1,27 +1,41 @@
 # simple_external
-GitHub README for CSGO Triggerbot
+<!DOCTYPE html>
+<html>
 
-This project is a simple triggerbot for the popular first-person shooter game, Counter-Strike: Global Offensive (CSGO). The triggerbot is written in C++ and uses memory reading/writing to automate the shooting process when a player's crosshair is over an enemy target.
-How it Works
+<head>
+    <meta charset="UTF-8">
+    <title>Triggerbot with Random Delay</title>
+</head>
 
-The triggerbot scans for the user-specified trigger key to be pressed, then proceeds to read memory for the player's current state, including their local player object, crosshair ID, and the entity that the crosshair is currently pointing at. If the entity is an enemy and has not already died, the triggerbot uses the mouse_event function to simulate a mouse click, causing the player to shoot at the target.
+<body>
+    <h1>Triggerbot with Random Delay</h1>
+    <p>This is a simple triggerbot that uses randomized delay to prevent detection. It uses the Windows API to read and write memory of a running process.</p>
 
-The triggerbot also has a configurable random delay between shots to avoid detection.
-Usage
+    <h2>Installation</h2>
+    <p>To use this code, you will need to have a C++ compiler installed on your machine. You can then simply download the files and compile them with your preferred C++ compiler.</p>
 
-To use this code, simply clone or download the repository and compile the source code using a C++ compiler. This project requires the Windows API, specifically the Windows.h and TlHelp32.h libraries.
+    <h2>Usage</h2>
+    <p>To use the triggerbot, you need to provide the process name in the constructor of the <code>Memory</code> class. You can then create an instance of the <code>Triggerbot</code> class and call the <code>Run</code> function in a loop to activate the triggerbot.</p>
 
-Before running the triggerbot, make sure to configure the trigger key and delay settings in config.h file.
-Code Structure
-memory.h
+    <h3>Configurations</h3>
+    <p>You can change the settings of the triggerbot by modifying the <code>Config</code> namespace in the <code>config.h</code> file. The default settings are:</p>
+    <pre><code>
+constexpr int TRIGGER_KEY = VK_XBUTTON1;
+constexpr int TRIGGER_DELAY_MIN = 5;
+constexpr int TRIGGER_DELAY_MAX = 15;
+    </code></pre>
 
-This file contains the Memory class, which is responsible for reading and writing memory to the CSGO process. It uses the Windows API to open the process and get its handle, then allows the user to read or write any value to a specified memory address. This class also includes a method to get the process ID and another method to get the base address of a specified module in the process.
-trigger.h
+    <h2>Code structure</h2>
+    <p>The code is structured as follows:</p>
+    <ul>
+        <li><code>trigger.h</code>: contains the definition of the <code>Triggerbot</code> class</li>
+        <li><code>config.h</code>: contains the <code>Config</code> namespace, which allows the user to customize the settings of the triggerbot</li>
+        <li><code>memory.h</code> and <code>memory.cpp</code>: contain the definition of the <code>Memory</code> class</li>
+        <li><code>main.cpp</code>: contains the <code>main</code> function</li>
+    </ul>
 
-This file contains the Triggerbot class, which is responsible for scanning the game state and simulating mouse clicks. It uses the Memory class to read memory values and includes a method to generate a random delay between shots.
-main.cpp
+    <h2>License</h2>
+    <p>This code is released under the MIT License. See the <code>LICENSE</code> file for more information.</p>
+</body>
 
-This file contains the main() function, which initializes the Memory object and the Triggerbot object, then loops infinitely while calling the Run() method on the Triggerbot object.
-Disclaimer
-
-This triggerbot is for educational purposes only and is not intended for use in actual gameplay. Using cheats in games violates the terms of service and can result in a ban or other penalties. Use this code at your own risk.
+</html>
