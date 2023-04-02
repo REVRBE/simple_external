@@ -1,63 +1,27 @@
 # simple_external
- Triggerbot
+GitHub README for CSGO Triggerbot
 
-This is a simple C++ program that demonstrates how to implement a triggerbot for the game Counter-Strike: Global Offensive (CS:GO) using the WinAPI. The program uses memory reading and mouse event generation to simulate an automated trigger finger.
-Dependencies
+This project is a simple triggerbot for the popular first-person shooter game, Counter-Strike: Global Offensive (CSGO). The triggerbot is written in C++ and uses memory reading/writing to automate the shooting process when a player's crosshair is over an enemy target.
+How it Works
 
-    Windows.h
-    TlHelp32.h
-    cstdint
-    stdexcept
-    iostream
-    thread
-    random
-    chrono
+The triggerbot scans for the user-specified trigger key to be pressed, then proceeds to read memory for the player's current state, including their local player object, crosshair ID, and the entity that the crosshair is currently pointing at. If the entity is an enemy and has not already died, the triggerbot uses the mouse_event function to simulate a mouse click, causing the player to shoot at the target.
 
+The triggerbot also has a configurable random delay between shots to avoid detection.
 Usage
 
-    Compile the program using your preferred C++ compiler.
-    Launch CS:GO and navigate to a game.
-    Run the compiled executable as administrator.
-    The triggerbot will now be active and will automatically fire when an enemy is under the player's crosshair.
+To use this code, simply clone or download the repository and compile the source code using a C++ compiler. This project requires the Windows API, specifically the Windows.h and TlHelp32.h libraries.
 
-Implementation
-trigger.h
-
-This header file contains the implementation of the Triggerbot class, which encapsulates the logic for the triggerbot.
-public
-
-    Triggerbot(const Memory& mem): Constructor that takes a Memory object and initializes the triggerbot with it.
-    int GetRandomTriggerDelay(): Generates a random number between TRIGGER_DELAY_MIN and TRIGGER_DELAY_MAX.
-    void Run(): Main function that reads memory and generates mouse events to simulate an automated trigger finger.
-
-private
-
-    const Memory& memory: Reference to the Memory object used to read memory.
-
-config.h
-
-This header file contains the configuration for the triggerbot. It allows the user to change the trigger key and the delay between shots.
+Before running the triggerbot, make sure to configure the trigger key and delay settings in config.h file.
+Code Structure
 memory.h
 
-This header file contains the implementation of the Memory class, which encapsulates the logic for reading and writing memory from the game process.
-public
+This file contains the Memory class, which is responsible for reading and writing memory to the CSGO process. It uses the Windows API to open the process and get its handle, then allows the user to read or write any value to a specified memory address. This class also includes a method to get the process ID and another method to get the base address of a specified module in the process.
+trigger.h
 
-    Memory(const char* processName): Constructor that takes the name of the process to attach to and initializes the Memory object with it.
-    ~Memory(): Destructor that releases the process handle.
-    uintptr_t GetModuleAddress(const char* moduleName) const: Returns the base address of the specified module.
-    template <typename T> T Read(uintptr_t address) const: Reads the value of type T from the specified memory address.
-    template <typename T> void Write(uintptr_t address, const T& value) const: Writes the value of type T to the specified memory address.
-    DWORD GetProcessId() const: Returns the process ID of the attached process.
-
-private
-
-    HANDLE processHandle: Handle to the attached process.
-    DWORD processId: ID of the attached process.
-    mutable DWORD protectFlag: Current protection flags for the memory.
-
+This file contains the Triggerbot class, which is responsible for scanning the game state and simulating mouse clicks. It uses the Memory class to read memory values and includes a method to generate a random delay between shots.
 main.cpp
 
-This file contains the main function that initializes the Memory object and the Triggerbot object and runs the triggerbot indefinitely.
+This file contains the main() function, which initializes the Memory object and the Triggerbot object, then loops infinitely while calling the Run() method on the Triggerbot object.
 Disclaimer
 
-This program is intended for educational purposes only. Use of this program in online gameplay is strictly prohibited and may result in consequences such as account bans or legal action. The author and publisher of this code assume no responsibility for any misuse or damage caused by this program.
+This triggerbot is for educational purposes only and is not intended for use in actual gameplay. Using cheats in games violates the terms of service and can result in a ban or other penalties. Use this code at your own risk.
